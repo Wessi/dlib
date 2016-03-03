@@ -74,6 +74,20 @@ int main()
             win.clear_overlay();
             win.set_image(cimg);
             win.add_overlay(render_face_detections(shapes));
+
+///////////////////////////////////
+            for (unsigned long i = 0; i < shapes.size(); ++i)
+            {
+                std::cout<<"i: "<<i<<std::endl;
+            const full_object_detection& d = shapes[i];
+
+
+            for (unsigned long i = 0; i <= 67; ++i)
+                std::cout<<"i: "<<i<<"c: "<<c++<<" X: "<<d.part(i).x()<<" Y: "<<d.part(i).y()<<std::endl; 
+            std::cout<<std::endl; 
+            }
+////////////////////////////
+
         }
     }
     catch(serialization_error& e)
