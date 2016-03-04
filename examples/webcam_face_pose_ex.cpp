@@ -83,7 +83,7 @@ int main()
 
 
             for (unsigned long i = 0; i <= 67; ++i)
-                std::cout<<"i: "<<i<<"c: "<<c++<<" X: "<<d.part(i).x()<<" Y: "<<d.part(i).y()<<std::endl; 
+                std::cout<<"i: "<<i<<" X: "<<d.part(i).x()<<" Y: "<<d.part(i).y()<<std::endl; 
             std::cout<<std::endl; 
             }
 ////////////////////////////
