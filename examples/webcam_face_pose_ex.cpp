@@ -39,11 +39,17 @@ using namespace std;
 
 int main()
 {
+    double lmPoints[68][2];//  = {{3,4},{5,6},{7,8},{0,1}};
+    bool flag = false;
+    int cnt = 0;
     try
     {
         cv::VideoCapture cap(0);
         image_window win;
-
+        // for (int i = 0; i < 4; ++i)
+        // {
+        //     cout<<"the pair:{"<<lmPoints[i][0]<<", "<<lmPoints[i][1]<<"}\n";
+        // }
         // Load face detection and pose estimation models.
         frontal_face_detector detector = get_frontal_face_detector();
         shape_predictor pose_model;
@@ -78,17 +84,33 @@ int main()
 ///////////////////////////////////
             for (unsigned long i = 0; i < shapes.size(); ++i)
             {
-                std::cout<<"i: "<<i<<std::endl;
-            const full_object_detection& d = shapes[i];
-
-
-            for (unsigned long i = 0; i <= 67; ++i)
-                std::cout<<"i: "<<i<<" X: "<<d.part(i).x()<<" Y: "<<d.part(i).y()<<std::endl; 
-            std::cout<<std::endl; 
+                
+                const full_object_detection& d = shapes[i];
+                for (unsigned long i = 0; i < 68; ++i)
+                {
+                    lmPoints[i][0] = (double)d.part(i).x();
+                    lmPoints[i][1] = (double)d.part(i).y();
+                    //std::cout<<"i: "<<i<<" X: "<<lmPoints[i][0]<<"="<<d.part(i).x()<<" Y: "<<lmPoints[i][1]<<"="<<d.part(i).y()<<std::endl; 
+                    if (!flag)
+                    {
+                        flag = true;                        
+                    }
+                }
+                //std::cout<<std::endl; 
+            }
+            
+            if(flag){
+                std::cout<<cnt++<<"i: test my code @icog"<<std::endl;
+                for (int i = 0; i < sizeof(lmPoints) / sizeof(*lmPoints); ++i)
+                {
+                    cout<<"LMP-"<<i<<":{"<<lmPoints[i][0]<<", "<<lmPoints[i][1]<<"}\n";
+                }
+                flag = false;
             }
 ////////////////////////////
 
         }
+        
     }
     catch(serialization_error& e)
     {
