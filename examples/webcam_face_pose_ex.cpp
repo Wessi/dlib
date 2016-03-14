@@ -42,6 +42,7 @@ int main()
     double lmPoints[68][2];//  = {{3,4},{5,6},{7,8},{0,1}};
     bool flag = false;
     int cnt = 0;
+    int s1, s2, s3, s4, s5, s6;
     try
     {
         cv::VideoCapture cap(0);
@@ -100,10 +101,28 @@ int main()
             }
             
             if(flag){
-                std::cout<<cnt++<<"i: test my code @icog"<<std::endl;
+                /*
+                find the area of eye: https://www.mathsisfun.com/geometry/area-irregular-polygons.html
+                for each value that are obtained by different eye actions
+                publish some action on the screen 
+
+                eg if(le<re --> write left eye close... etc)
+                */
+                double diffLeftEye = lmPoints[47][1] - lmPoints[43][1];
+                double diffRightEye = lmPoints[40][1] - lmPoints[38][1];  
+                double s2 = lmPoints[38][0] - lmPoints[37][0];  
+                double s5 = lmPoints[41][0] - lmPoints[40][0];  
+
+                cout<<"Side2: test my code @icog: "<<s2<<endl;
+                cout<<"Side5: test my code @icog: "<<s5<<endl;
+           
+                cout<<"Left eye: test my code @icog: "<<diffLeftEye<<endl;
+                cout<<"Right eye: test my code @icog: "<<diffRightEye<<endl;
+                
                 for (int i = 0; i < sizeof(lmPoints) / sizeof(*lmPoints); ++i)
                 {
-                    cout<<"LMP-"<<i<<":{"<<lmPoints[i][0]<<", "<<lmPoints[i][1]<<"}\n";
+
+                    //cout<<"LMP-"<<i<<":{"<<lmPoints[i][0]<<", "<<lmPoints[i][1]<<"}\n";
                 }
                 flag = false;
             }
@@ -123,5 +142,7 @@ int main()
     {
         cout << e.what() << endl;
     }
+    /*
+    */
 }
 
