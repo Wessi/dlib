@@ -12,7 +12,7 @@ namespace dlib
 {
     inline std::vector<image_window::overlay_line> render_face_detections (
         const std::vector<full_object_detection>& dets,
-        const rgb_pixel color = rgb_pixel(0,255,0)
+        const rgb_pixel color = rgb_pixel(255,215,0)
     )
     {
         std::vector<image_window::overlay_line> lines;
@@ -26,15 +26,17 @@ namespace dlib
 
             const full_object_detection& d = dets[i];
             for (unsigned long i = 1; i <= 16; ++i)
-                lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
+                //lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
 
             for (unsigned long i = 28; i <= 30; ++i)
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
 
             for (unsigned long i = 18; i <= 21; ++i)
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
+
             for (unsigned long i = 23; i <= 26; ++i)
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
+            
             for (unsigned long i = 31; i <= 35; ++i)
                 lines.push_back(image_window::overlay_line(d.part(i), d.part(i-1), color));
             lines.push_back(image_window::overlay_line(d.part(30), d.part(35), color));
