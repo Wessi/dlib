@@ -150,13 +150,14 @@ int main()
                     verticesIO[msize][1] = lmPoints[m][1];
                     msize++;
                 }
-                // cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
-                // cout<<"\nHello Outside-msize "<<msize<<" Right AREA:"<<areaOfShape(verticesIO, msize);
-                // cout<<"\nHello Outside-msize "<<msize<<" Right AREA:"<<lmPoints[67][1] - lmPoints[61][1];
-                // cout<<"\nHello Outside-msize "<<msize<<" Right AREA:"<<lmPoints[66][1] - lmPoints[62][1];
-                // cout<<"\nHello Outside-msize "<<msize<<" Right AREA:"<<lmPoints[65][1] - lmPoints[63][1];
-                // cout<<"\nHello Outside-msize "<<msize<<" Right AREA:"<<lmPoints[64][0] - lmPoints[60][0];
-                // cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+                cout<<"\nlips-smile-R Nose @31: ("<<lmPoints[0][31]<<", "<<lmPoints[1][31]<<")";
+                cout<<"\nlips-smile-R Mouth @48: ("<<lmPoints[0][48]<<", "<<lmPoints[1][48]<<")";
+                cout<<"\nlips-smile-R Mouth @49: ("<<lmPoints[0][49]<<", "<<lmPoints[1][49]<<")";
+                cout<<"\nlips-smile-R Mouth @59: ("<<lmPoints[0][59]<<", "<<lmPoints[1][59]<<")";
+                cout<<"\nlips-smile-R Mouth @60: ("<<lmPoints[0][60]<<", "<<lmPoints[1][60]<<")";
+                cout<<"\nArea of verticesIO: "<<areaOfShape(verticesIO, msize);
+                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
 
 
                 flag = false;
