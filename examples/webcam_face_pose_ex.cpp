@@ -41,12 +41,19 @@ using namespace std;
 double areaOfShape(double points[68][2], long rows);
 int main()
 {
+
     double lmPoints[68][2];
+    double first100ds[500] = {};
     double verticesLE[68][2] = {{}};
     double verticesRE[68][2] = {{}};
+    double lipsSmileL[68][2] = {{}};
+    double lipsSmileR[68][2] = {{}};
     double verticesIO[68][2] = {{}};
-    double coordinates[68][2] = { {3,4}, {5,11}, {12,8}, {9,5},{5,6}};
-    bool flag = false;
+    double lipsSmileLi[68][2] = {{}};
+    double lipsSmileRi[68][2] = {{}};
+    double coordinates[68][2] = {{3,4}, {5,11}, {12,8}, {9,5},{5,6}};
+    bool faceDetected = false;
+    bool capStarted = false;
     int cnt = 0; 
     int s1, s2, s3, s4, s5, s6;
     try
@@ -65,7 +72,7 @@ int main()
         // Grab and process frames until the main window is closed by the user.
         while(!win.is_closed())
         {
-            //usleep(1000000);//sleep for 1 second
+            // usleep(1000000/2);//sleep for 1 second
             // Grab a frame
             cv::Mat temp;
             cap >> temp;
@@ -99,15 +106,17 @@ int main()
                     lmPoints[i][0] = (double)d.part(i).x();
                     lmPoints[i][1] = (double)d.part(i).y();
                     //std::cout<<"i: "<<i<<" X: "<<lmPoints[i][0]<<"="<<d.part(i).x()<<" Y: "<<lmPoints[i][1]<<"="<<d.part(i).y()<<std::endl; 
-                    if (!flag)
+                    if (!faceDetected)
                     {
-                        flag = true;                        
+                       
+                        faceDetected = true;            
                     }
                 }
                 //std::cout<<std::endl; 
             }
             
-            if(flag){
+            if(faceDetected){
+
                 /*
                 find the area of polygon
                 for each value that are obtained by different eye or mouse actions
@@ -137,6 +146,7 @@ int main()
 
                     vsize++;
                 }
+                // https://www.youtube.com/watch?v=t9FzskM3P_0#t=58
                 // cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
                 // cout<<"\nHello Outside-vsize "<<vsize<<" Right AREA:"<<areaOfShape(verticesRE, vsize);
                 // cout<<"\nHello Outside-vsize "<<vsize<<" Left AREA:"<<areaOfShape(verticesLE, vsize);
@@ -150,17 +160,103 @@ int main()
                     verticesIO[msize][1] = lmPoints[m][1];
                     msize++;
                 }
-                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
-                cout<<"\nlips-smile-R Nose @31: ("<<lmPoints[0][31]<<", "<<lmPoints[1][31]<<")";
-                cout<<"\nlips-smile-R Mouth @48: ("<<lmPoints[0][48]<<", "<<lmPoints[1][48]<<")";
-                cout<<"\nlips-smile-R Mouth @49: ("<<lmPoints[0][49]<<", "<<lmPoints[1][49]<<")";
-                cout<<"\nlips-smile-R Mouth @59: ("<<lmPoints[0][59]<<", "<<lmPoints[1][59]<<")";
-                cout<<"\nlips-smile-R Mouth @60: ("<<lmPoints[0][60]<<", "<<lmPoints[1][60]<<")";
-                cout<<"\nArea of verticesIO: "<<areaOfShape(verticesIO, msize);
-                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+
+                //vertices for lipsSmileROut
+                lipsSmileR[0][0] = lmPoints[59][0];
+                lipsSmileR[0][1] = lmPoints[59][1];
+
+                lipsSmileR[1][0] = lmPoints[48][0];
+                lipsSmileR[1][1] = lmPoints[48][1];
+
+                lipsSmileR[2][0] = lmPoints[49][0];
+                lipsSmileR[2][1] = lmPoints[49][1];
+
+                lipsSmileR[3][0] = lmPoints[50][0];
+                lipsSmileR[3][1] = lmPoints[50][1];
+                
+                lipsSmileR[4][0] = lmPoints[60][0];
+                lipsSmileR[4][1] = lmPoints[60][1];
+
+                lipsSmileR[5][0] = lmPoints[61][0];
+                lipsSmileR[5][1] = lmPoints[61][1];
+
+                lipsSmileR[6][0] = lmPoints[67][0];
+                lipsSmileR[6][1] = lmPoints[67][1];
+
+                //vertices for lipsSmileLOut
+                lipsSmileL[0][0] = lmPoints[55][0];
+                lipsSmileL[0][1] = lmPoints[55][1];
+
+                lipsSmileL[1][0] = lmPoints[54][0];
+                lipsSmileL[1][1] = lmPoints[54][1];
+
+                lipsSmileL[2][0] = lmPoints[53][0];
+                lipsSmileL[2][1] = lmPoints[53][1];
+
+                lipsSmileL[3][0] = lmPoints[52][0];
+                lipsSmileL[3][1] = lmPoints[52][1];
+
+                lipsSmileL[4][0] = lmPoints[64][0];
+                lipsSmileL[4][1] = lmPoints[64][1];
+
+                lipsSmileL[5][0] = lmPoints[63][0];
+                lipsSmileL[5][1] = lmPoints[63][1];
+
+                lipsSmileL[6][0] = lmPoints[65][0];
+                lipsSmileL[6][1] = lmPoints[65][1];
+                //  //vertices for lipsSmileRInner
+                // lipsSmileRi[0][0] = lmPoints[60][0];
+                // lipsSmileRi[0][1] = lmPoints[60][1];
+
+                // lipsSmileRi[1][0] = lmPoints[61][0];
+                // lipsSmileRi[1][1] = lmPoints[61][1];
+
+                // lipsSmileRi[2][0] = lmPoints[67][0];
+                // lipsSmileRi[2][1] = lmPoints[67][1];
+
+                 //vertices for lipsSmileRInner
+                // lipsSmileLi[0][0] = lmPoints[64][0];
+                // lipsSmileLi[0][1] = lmPoints[64][1];
+
+                // lipsSmileLi[1][0] = lmPoints[63][0];
+                // lipsSmileLi[1][1] = lmPoints[63][1];
+
+                // lipsSmileLi[2][0] = lmPoints[65][0];
+                // lipsSmileLi[2][1] = lmPoints[65][1];
 
 
-                flag = false;
+                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+                // cout<<"\nlipsSmileR Nose @31: ("<<lmPoints[31][0]<<", "<<lmPoints[31][1]<<")";
+                double aR = areaOfShape(lipsSmileR, 7);
+                double aL = areaOfShape(lipsSmileL, 7);
+                // if(aR>aL)
+                // {
+                    cout<<"\nArea of lipsSmileR: "<<aR;
+                // }
+                // else if (aL>aR)
+                // {
+                //     cout<<"\nArea of lipsSmileL: "<<aL;
+                // }
+                cout<<"\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n";
+                // cout<<"\nArea of lipsSmileL: "<<aL;
+                // cout<<"\nArea of lipsSmileR: "<<aR;
+                //start capturing first 100ds
+                if (!capStarted)
+                {
+                    if (cnt < 100)
+                    {
+                        first100ds[cnt++] = aR;
+                        cout<<"\ncnt:"<<cnt<<"\n";
+                    }
+                    else{
+                        capStarted = true;
+                        cout<<"\ncapStarted:"<<capStarted<<"\n";
+                    }
+                }
+
+                
+
+                faceDetected = false;
             }            
             ///////////////////////////////////added
         }
@@ -171,7 +267,7 @@ int main()
     {
         cout << "You need dlib's default face landmarking model file to run this example." << endl;
         cout << "You can get it from the following URL: " << endl;
-        cout << "   http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2" << endl;
+        cout << "http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2" << endl;
         cout << endl << e.what() << endl;
     }
     catch(exception& e)
