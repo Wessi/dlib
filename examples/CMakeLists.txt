@@ -118,8 +118,8 @@ find_package(OpenCV)
 if (OpenCV_FOUND)
    include_directories(${OpenCV_INCLUDE_DIRS})
 
-   ADD_EXECUTABLE(webcam_face_pose_ex webcam_face_pose_ex.cpp)
-   TARGET_LINK_LIBRARIES(webcam_face_pose_ex dlib ${OpenCV_LIBS} )
+   ADD_EXECUTABLE(faction_pose_normalizer faction_pose_normalizer.cpp)
+   TARGET_LINK_LIBRARIES(faction_pose_normalizer dlib ${OpenCV_LIBS} )
 endif()
 
 
